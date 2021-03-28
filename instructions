@@ -2,5 +2,5 @@ file_01.bin md5 aaeab83fcc93cd3ab003fa8bfd8d8906
 file_02.bin md5 6dc2d05c8374293fe20bc4c22c236e2e
 file_03.bin md5 6dc2d05c8374293fe20bc4c22c236e2e
 file_04.txt sha1 da39a3ee5e6b4b0d3255bfef95601890afd80709
-case_1.py md5 3c48a4127d3390b0a3d37b13e1da5ccb
-case_1_config.xml sha1 002f1966e8b8b2cea229d6cef955aaceaf0384f5
+case_1.py md5 6ca709f8abcd6dcaa6292630c13b47f2
+case_1_config.xml sha1 002f1966e8b8b2cea229d6cef955aaceaf0384f4
