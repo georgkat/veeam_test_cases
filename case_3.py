@@ -2,6 +2,7 @@ import os
 import datetime
 import random
 import sys
+import traceback
 
 
 class Testing:  # Головной класс
@@ -70,16 +71,22 @@ class Testing:  # Головной класс
                             Testing.FileListCase.clean_up(self)
                             print('Test passed')
                         except Exception as ex:
+                            err = traceback.format_exc()
                             print(f'Clean up failed with {ex}')
+                            print(err)
                     except Exception as ex:
+                        err = traceback.format_exc()
                         print(f'Exception. Home directory parsing failed with {ex}')
                         print('Exception. Test stopped')
+                        print(err)
                 else:
                     print('Datestamp unsuitable')
                     print('Test stopped')
             except Exception as ex:
+                err = traceback.format_exc()
                 print(f'Exception. Datestamp check failed with {ex}')
                 print('Exception. Test stopped')
+                print(err)
 
     class RandomFileCase:
         def __init__(self, name='RandomFileCase', tc_id='1'):
@@ -110,9 +117,9 @@ class Testing:  # Головной класс
                     return False  # если памяти меньше гигабайта возвращает False
                 return True
             else:
-                try:
-                    mem_bytes = os.sysconf('SC_PAGE_SIZE') * os.sysconf('SC_PHYS_PAGES')
-                    if mem_bytes <= 1024 ** 3:
+                try:  # для linux, macos и тп
+                    ram_size = os.sysconf('SC_PAGE_SIZE') * os.sysconf('SC_PHYS_PAGES')
+                    if ram_size <= 1024 ** 3:
                         return False
                 except:
                     print('Can\'t get memory size')
@@ -151,17 +158,23 @@ class Testing:  # Головной класс
                             Testing.RandomFileCase.cleanup(self)
                             print('Test passed')
                         except Exception as ex:
+                            err = traceback.format_exc()
                             print(f'Exception. Clean up failed with {ex}')
                             print('Exception. Test stopped')
+                            print(err)
                     except Exception as ex:
+                        err = traceback.format_exc()
                         print(f'Exception. Random file creation failed with {ex}')
                         print('Exception. Test stopped')
+                        print(err)
                 else:
                     print('RAM test failed')
                     print('Test stopped')
             except Exception as ex:
+                err = traceback.format_exc()
                 print(f'Exception. RAM test failed with {ex}')
                 print('Exception. Test stopped')
+                print(err)
 
 
 Testing()  # вызов головного класса с тест-кейсами

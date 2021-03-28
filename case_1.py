@@ -1,6 +1,7 @@
 import xml.dom.minidom as minidom
 import shutil
 import os
+import traceback
 from sys import exit
 
 SOURCE = 'case_1_config.xml'  # исходный конфигурационный xml-файл из задания
@@ -23,7 +24,9 @@ def dict_prepper(file_name):
             file_dict[file_name] = {'source_path': source_path, 'destination_path': destination_path}
         return file_dict
     except Exception as ex:
+        err = traceback.format_exc()
         exit(f'Configuration file broken or not found and {ex}')
+        print(err)
 
 
 def copy(src, dst):
@@ -37,11 +40,15 @@ def copy(src, dst):
         print(f'Success!')
         shutil.copyfile(src, dst)
     except PermissionError:
+        err = traceback.format_exc()
         print(f'Can\'t copy {src} to {dst}')
         print('Permission error, run under admin rights')
+        print(err)
     except Exception as ex:
+        err = traceback.format_exc()
         print(f'Can\'t copy {src} to {dst}')
         print(f'{ex}')
+        print(err)
 
 
 def copy_from_dict(dict_of_files):

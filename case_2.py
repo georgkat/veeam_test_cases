@@ -1,6 +1,7 @@
 import argparse
 import hashlib
 import os
+import traceback
 from sys import exit
 
 parser = argparse.ArgumentParser()  # объявляю парсер
@@ -54,7 +55,9 @@ def instruction(file_name):
                 instruct_dict[row[0]] = {'method': row[1], 'hash': row[2]}
         return instruct_dict
     except Exception as ex:
+        err = traceback.format_exc()
         exit(f'Critical Fail! Wrong input file format and/or {ex}')
+        print(err)
 
 
 def review(instruction_file_name, dest_dir):
