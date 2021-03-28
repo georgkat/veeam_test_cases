@@ -109,14 +109,15 @@ class Testing:  # Головной класс
                 if ram_size <= 1024 ** 3:
                     return False  # если памяти меньше гигабайта возвращает False
                 return True
-            elif sys.platform == 'linux':  # проверка платформы на Linux
-                tot_m, used_m, free_m = map(int, os.popen('free -t -m').readlines()[-1].split()[1:])
-                if tot_m <= 1024 ** 3:
+            else:
+                try:
+                    mem_bytes = os.sysconf('SC_PAGE_SIZE') * os.sysconf('SC_PHYS_PAGES')
+                    if mem_bytes <= 1024 ** 3:
+                        return False
+                except:
+                    print('Can\'t get memory size')
                     return False
                 return True
-            else:
-                print('Unexpected platform, can\'t read RAM size')
-                return False
 
         def run(self):
             """
